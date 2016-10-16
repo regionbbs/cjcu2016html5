@@ -1,0 +1,56 @@
+<html>
+
+<body>
+	<p>BMI Calculator</p>
+	<ul style="list-style: none;">
+		<li>Height: <input type="number" required="required" id="txtHeight" width="40px" /></li>
+		<li>Weight: <input type="number" required="required" id="txtWeight" width="40px" /></li>
+		<li><input type="button" value="Calc" onclick="calc()" /></li>
+	</ul>
+    <p>BMI: <span id="resultbmi"></span></p>
+    <p>Result: <span id="result"></span></p>
+	<script type="text/javascript">
+
+        function calc()
+        {
+            var h = document.getElementById("txtHeight").value;
+            var w = document.getElementById("txtWeight").value;
+
+            if (isNaN(parseInt(h)))
+            {
+                alert("Illegal height value.");
+                return;
+            }
+
+            if (isNaN(parseInt(w)))
+            {
+                alert("Illegal weight value.");
+                return;
+            }
+
+            var bmi = w / Math.pow((h / 100), 2);
+
+            if (bmi < 18.5)
+			    result = "Less";
+	        else if (bmi > 35.0)
+			    result = "HeavyFat";
+	        else
+	        {
+		        if (bmi >= 18.5 && bmi < 24)
+			        result = "Normal";
+		        else if (bmi >= 24 && bmi < 27)
+			        result = "HigherWeight";
+		        else if (bmi >= 27 && bmi < 30)
+			        result = "LightFat";
+		        else
+		            result = "Fat";
+	        }
+
+            document.getElementById("resultbmi").innerText = bmi;
+            document.getElementById("result").innerText = result;
+        }
+
+        </script>
+</body>
+
+</html>

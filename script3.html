@@ -1,0 +1,22 @@
+<html>
+    <body>
+	    <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+        <script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/json2/20150503/json2.min.js"></script>
+	    <script type="text/javascript" language="javascript">
+		
+		    $(function()
+			{
+			    $.ajax({
+				    url: "http://data.kaohsiung.gov.tw/Opendata/DownLoad.aspx?Type=2&CaseNo1=AV&CaseNo2=1&FileType=1&Lang=C&FolderType=O",
+					type: "GET"
+				}).done(function(data)
+				{
+				    var json = JSON.parse(data);
+					console.log(json);
+				});
+			});
+		
+        </script>
+	</body>
+</html>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+    <head>
+	    <style type="text/css">
+		
+		.blankPrompt { background-color: red; }
+		
+		</style>
+	</head>
+	<body>
+	    <h1>Calculate your BMI</h1>
+	    <p>Height in CM: <input type="text" id="txtHeightInCM" class="blankPrompt" /></p>
+	    <p>Weight in KG: <input type="text" id="txtWeightInKG" class="blankPrompt" /></p>
+	    <p><input type="button" value="Calc Now!" id="cmdCalc" /></p>
+		<p>BMI: <span id="txtBMI">Press "Calc Now!" to get result.</span></p>
+		<p>Result: <span id="txtResult">Press "Calc Now!" to get result.</span></p>
+		
+        <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+        <script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+	    <script type="text/javascript" src="bmi.js"></script>
+	    <script type="text/javascript" language="javascript">
+		
+		// initialize events and objects.
+		$(function() // = $(document).ready(function()
+		{
+		    $("#cmdCalc").on("click", function()
+			{
+			    calculateBMI();
+			});
+			
+			$("input[type='text']").on("keypress", function()
+			{
+			    var element = $(event.target);
+				var value = element.val();
+			
+				if (value == "")
+					element.css("backgroundColor", "red"); //element.className = "blankPrompt";
+				else
+					element.css("backgroundColor", "white"); //element.className = "";
+			});
+		});
+
+        function checkBlankState()
+        {
+		    var element = event.target;
+		    var value = element.value;
+			
+			if (value == "")
+			    element.style.backgroundColor = "red"; //element.className = "blankPrompt";
+			else
+			    element.style.backgroundColor = "white"; //element.className = "";
+        }		
+		
+		function calculateBMI()
+		{
+            var heightValue = $("#txtHeightInCM").val();
+            var weightValue = $("#txtWeightInKG").val();
+		    var height = parseInt(heightValue);
+		    var weight = parseInt(weightValue);
+			
+			if (isNaN(height))
+			{
+			    alert("Height is not acceptual number format.");
+			    return;
+			}
+			
+			if (isNaN(weight))
+			{
+			    alert("Weight is not acceptual number format.");
+			    return;
+			}				
+			
+			var result = getBMIQualify(height, weight);
+			
+			$("#txtBMI").html("<b>" + result.BMI + "</b>");
+			$("#txtResult").html("<b>" + result.RESULT + "</b>");
+		}
+		
+	    </script>
+	</body>
+</html>
