@@ -1,0 +1,42 @@
+<html>
+<body>
+	<p>BMI Calculator</p>
+	<ul style="list-style: none;">
+		<li>Height: <input type="number" required="required" id="txtHeight" width="40px" /></li>
+		<li>Weight: <input type="number" required="required" id="txtWeight" width="40px" /></li>
+		<li><input type="button" id="cmdCalc" value="Calc" /></li>
+	</ul>
+    <p>BMI: <span id="resultbmi"></span></p>
+    <p>Result: <span id="result"></span></p>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script type="text/javascript" src="bmi-service.js"></script>
+	<script type="text/javascript">
+
+        $(function()
+        {
+            $("#cmdCalc").on("click", function()
+            {
+                var s;
+
+                try
+                {
+                    s = new bmiService($("#txtHeight").val(), $("#txtWeight").val());
+                }
+                catch (e)
+                {
+                    alert(e);
+                    return;
+                }
+
+                var r = s.getResult();
+
+                $("#resultbmi").text(r.BodyIndex);
+                $("#result").text(r.BodyIndexLevel);
+
+            });
+        })
+
+        </script>
+</body>
+
+</html>
