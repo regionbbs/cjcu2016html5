@@ -9,29 +9,22 @@
     <p>BMI: <span id="resultbmi"></span></p>
     <p>Result: <span id="result"></span></p>
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-    <script type="text/javascript" src="bmi-service.js"></script>
+    <script type="text/javascript" src="bmi-service-base.js"></script>
+    <script type="text/javascript" src="bmi-service-male.js"></script>
 	<script type="text/javascript">
 
         $(function()
         {
             $("#cmdCalc").on("click", function()
             {
-                var s;
+                var h = parseInt($("#txtHeight").val());
+                var w = $("#txtWeight").val();
+                var s = new bmiServiceMale();
+                var comment = s.getBodyIndexLevel(h, w);
+                var bmi = s.getBodyIndex(h, w);
 
-                try
-                {
-                    s = new bmiService($("#txtHeight").val(), $("#txtWeight").val());
-                }
-                catch (e)
-                {
-                    alert(e);
-                    return;
-                }
-
-                var r = s.getResult();
-
-                $("#resultbmi").text(r.BodyIndex);
-                $("#result").text(r.BodyIndexLevel);
+                $("#resultbmi").text(bmi);
+                $("#result").text(comment);
 
             });
         })
